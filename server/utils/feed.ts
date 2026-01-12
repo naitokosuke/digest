@@ -1,22 +1,35 @@
-import Parser from 'rss-parser'
 import type { Source, FeedItem } from '~~/shared'
 
-const parser = new Parser()
+function getTextContent(element: Element | null): string {
+  return element?.textContent?.trim() || ''
+}
+
+function parseRssXml(xml: string, source: Source): FeedItem[] {
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(xml, 'text/xml')
+  const items = doc.querySelectorAll('item')
+
+  return Array.from(items).map((item) => {
+    const enclosure = item.querySelector('enclosure')
+
+    return {
+      title: getTextContent(item.querySelector('title')),
+      description: getTextContent(item.querySelector('description')) || undefined,
+      url: getTextContent(item.querySelector('link')),
+      image: enclosure?.getAttribute('url') || undefined,
+      publishedAt: new Date(getTextContent(item.querySelector('pubDate')) || Date.now()),
+      source: {
+        name: source.name,
+        icon: source.icon
+      }
+    }
+  })
+}
 
 export async function fetchRssFeed(source: Source): Promise<FeedItem[]> {
-  const feed = await parser.parseURL(source.url)
-
-  return feed.items.map(item => ({
-    title: item.title || '',
-    description: item.contentSnippet || item.content || undefined,
-    url: item.link || '',
-    image: item.enclosure?.url || undefined,
-    publishedAt: item.pubDate ? new Date(item.pubDate) : new Date(),
-    source: {
-      name: source.name,
-      icon: source.icon
-    }
-  }))
+  const response = await fetch(source.url)
+  const xml = await response.text()
+  return parseRssXml(xml, source)
 }
 
 export async function fetchAllFeeds(sources: Source[]): Promise<FeedItem[]> {
