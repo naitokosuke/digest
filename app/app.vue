@@ -66,7 +66,8 @@ div {
 
     section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+      grid-template-columns: minmax(0, 600px);
+      justify-content: center;
       gap: 24px;
     }
   }
