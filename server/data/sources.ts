@@ -18,6 +18,11 @@ export const sources: Source[] = [
     name: 'Slides',
     url: 'https://slides.naito.dev/feed.xml',
     icon: 'mdi:presentation'
+  },
+  {
+    type: 'rss',
+    name: 'Blog',
+    url: 'https://blog.naito.dev/feed.xml',
+    icon: 'mdi:post'
   }
-  // Blog (blog.naito.dev) - RSS feed not available yet
 ]
