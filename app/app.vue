@@ -66,7 +66,7 @@ div {
 
     section {
       display: grid;
-      grid-template-columns: minmax(0, 600px);
+      grid-template-columns: minmax(0, 80%);
       justify-content: center;
       gap: 24px;
     }
