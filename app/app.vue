@@ -3,19 +3,15 @@ const { data: feeds, status } = await useFetch('/api/feeds')
 </script>
 
 <template>
-  <div class="container">
+  <div>
     <NuxtRouteAnnouncer />
-    <header class="header">
+    <header>
       <h1>Digest</h1>
     </header>
-    <main class="main">
-      <div v-if="status === 'pending'" class="loading">
-        Loading...
-      </div>
-      <div v-else-if="status === 'error'" class="error">
-        Failed to load feeds
-      </div>
-      <div v-else class="feed-grid">
+    <main>
+      <p v-if="status === 'pending'">Loading...</p>
+      <p v-else-if="status === 'error'">Failed to load feeds</p>
+      <section v-else>
         <FeedCard
           v-for="feed in feeds"
           :key="feed.url"
@@ -26,7 +22,7 @@ const { data: feeds, status } = await useFetch('/api/feeds')
           :published-at="feed.publishedAt"
           :source="feed.source"
         />
-      </div>
+      </section>
     </main>
   </div>
 </template>
@@ -47,31 +43,32 @@ body {
 </style>
 
 <style scoped>
-.container {
+div {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
-}
 
-.header {
-  margin-bottom: 32px;
-}
+  header {
+    margin-bottom: 32px;
 
-.header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-}
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
 
-.loading,
-.error {
-  text-align: center;
-  padding: 48px;
-  color: #666;
-}
+  main {
+    p {
+      text-align: center;
+      padding: 48px;
+      color: #666;
+    }
 
-.feed-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
-  gap: 24px;
+    section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+      gap: 24px;
+    }
+  }
 }
 </style>
