@@ -1,6 +1,8 @@
-export type Source =
-  | { type: 'rss'; url: string; name: string; icon: string }
-  | { type: 'manual'; urls: string[]; name: string; icon: string }
+export interface Source {
+  url: string
+  name: string
+  icon: string
+}
 
 export interface FeedItem {
   title: string
