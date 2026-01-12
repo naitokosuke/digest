@@ -3,6 +3,18 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  app: {
+    head: {
+      title: 'Digest',
+      meta: [
+        { name: 'description', content: 'naitokosuke\'s feed digest' },
+        { property: 'og:title', content: 'Digest' },
+        { property: 'og:description', content: 'naitokosuke\'s feed digest' },
+        { property: 'og:image', content: '/og-image.png' }
+      ]
+    }
+  },
+
   modules: [
     '@nuxt/a11y',
     '@nuxt/eslint',

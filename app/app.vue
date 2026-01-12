@@ -1,13 +1,4 @@
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Digest',
-  ogTitle: 'Digest',
-  description: 'naitokosuke\'s feed digest',
-  ogDescription: 'naitokosuke\'s feed digest',
-  ogImage: '/og-image.png',
-  twitterCard: 'summary_large_image'
-})
-
 const { data: feeds, status } = await useFetch('/api/feeds')
 </script>
 
