@@ -21,7 +21,7 @@ function getTagContent(xml: string, tag: string): string {
 
 function getEnclosureUrl(xml: string): string | undefined {
   const match = xml.match(/<enclosure[^>]+url=["']([^"']+)["']/)
-  return match?.[1]
+  return match?.[1] ? decodeHtmlEntities(match[1]) : undefined
 }
 
 function parseRssXml(xml: string, source: Source): FeedItem[] {
