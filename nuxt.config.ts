@@ -10,5 +10,9 @@ export default defineNuxtConfig({
     '@nuxt/hints',
     '@nuxt/icon',
     '@nuxt/image'
-  ]
+  ],
+
+  nitro: {
+    preset: 'cloudflare-pages'
+  }
 })
