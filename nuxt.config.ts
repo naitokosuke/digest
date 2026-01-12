@@ -12,6 +12,17 @@ export default defineNuxtConfig({
     '@nuxt/image'
   ],
 
+  image: {
+    domains: [
+      'blog.naito.dev',
+      'slides.naito.dev',
+      'zenn.dev',
+      'res.cloudinary.com',
+      'static.sizu.me',
+      'r2.sizu.me'
+    ]
+  },
+
   nitro: {
     preset: 'cloudflare_module',
     cloudflare: {
