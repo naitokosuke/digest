@@ -22,13 +22,18 @@ interface Props {
   }
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const proxyImageUrl = computed(() => {
+  if (!props.image) return undefined
+  return `/api/image?url=${encodeURIComponent(props.image)}`
+})
 </script>
 
 <template>
   <NuxtLink :to="url" external target="_blank">
-    <figure v-if="image">
-      <NuxtImg :src="image" :alt="title" loading="lazy" />
+    <figure v-if="proxyImageUrl">
+      <NuxtImg :src="proxyImageUrl" :alt="title" loading="lazy" />
     </figure>
     <div>
       <h2>{{ title }}</h2>
