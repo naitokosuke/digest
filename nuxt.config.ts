@@ -10,7 +10,9 @@ export default defineNuxtConfig({
         { name: 'description', content: 'naitokosuke\'s feed digest' },
         { property: 'og:title', content: 'Digest' },
         { property: 'og:description', content: 'naitokosuke\'s feed digest' },
-        { property: 'og:image', content: '/og-image.png' }
+        { property: 'og:image', content: '/og-image.png' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:image', content: '/og-image.png' }
       ]
     }
   },
