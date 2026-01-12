@@ -1,8 +1,22 @@
 import type { Source, FeedItem } from '~~/shared'
 
+function stripCdata(text: string): string {
+  return text.replace(/^<!\[CDATA\[/, '').replace(/\]\]>$/, '')
+}
+
+function decodeHtmlEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+}
+
 function getTagContent(xml: string, tag: string): string {
   const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`))
-  return match?.[1]?.trim() || ''
+  const content = match?.[1]?.trim() || ''
+  return decodeHtmlEntities(stripCdata(content))
 }
 
 function getEnclosureUrl(xml: string): string | undefined {
