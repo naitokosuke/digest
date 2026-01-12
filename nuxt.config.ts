@@ -13,14 +13,7 @@ export default defineNuxtConfig({
   ],
 
   image: {
-    domains: [
-      'blog.naito.dev',
-      'slides.naito.dev',
-      'zenn.dev',
-      'res.cloudinary.com',
-      'static.sizu.me',
-      'r2.sizu.me'
-    ]
+    provider: 'none'
   },
 
   nitro: {
