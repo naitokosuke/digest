@@ -4,7 +4,7 @@ export const sources: Source[] = [
   {
     type: 'rss',
     name: 'Zenn',
-    url: 'https://zenn.dev/naitokosuke/feed',
+    url: 'https://zenn.dev/kosuke_naito/feed',
     icon: 'simple-icons:zenn'
   }
   // Blog (blog.naito.dev) - RSS will be added later
