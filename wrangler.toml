@@ -1,7 +1,4 @@
 name = "digest"
-main = ".output/server/index.mjs"
 compatibility_date = "2025-01-12"
 compatibility_flags = ["nodejs_compat"]
-
-[assets]
-directory = ".output/public"
+pages_build_output_dir = ".output/public"
