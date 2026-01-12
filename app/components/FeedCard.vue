@@ -1,9 +1,10 @@
 <script lang="ts">
 function formatDate(d: string | Date): string {
   const date = d instanceof Date ? d : new Date(d)
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
+  // Use UTC methods to ensure consistent output between server and client
+  const year = date.getUTCFullYear()
+  const month = date.getUTCMonth() + 1
+  const day = date.getUTCDate()
   return `${year}年${month}月${day}日`
 }
 </script>
