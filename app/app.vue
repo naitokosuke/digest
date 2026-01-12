@@ -52,6 +52,7 @@ div {
     margin-bottom: 32px;
 
     h1 {
+      font-family: 'Playfair Display', serif;
       font-size: 2rem;
       font-weight: 700;
     }
