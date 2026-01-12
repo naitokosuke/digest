@@ -1,11 +1,10 @@
 <script lang="ts">
 function formatDate(d: string | Date): string {
   const date = d instanceof Date ? d : new Date(d)
-  return date.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  })
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return `${year}年${month}月${day}日`
 }
 </script>
 
