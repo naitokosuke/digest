@@ -7,12 +7,13 @@ export default defineNuxtConfig({
     head: {
       title: 'Digest',
       meta: [
-        { name: 'description', content: 'naitokosuke\'s feed digest' },
+        { name: 'description', content: "naitokosuke's feed digest" },
         { property: 'og:title', content: 'Digest' },
-        { property: 'og:description', content: 'naitokosuke\'s feed digest' },
-        { property: 'og:image', content: '/og-image.png' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:image', content: '/og-image.png' }
+        { property: 'og:description', content: "naitokosuke's feed digest" },
+        { property: 'og:image', content: 'https://digest.naito.dev/og-image.png' },
+        { property: 'og:url', content: 'https://digest.naito.dev/' },
+        { property: 'og:type', content: 'website' },
+        { name: 'twitter:card', content: 'summary_large_image' }
       ]
     }
   },
