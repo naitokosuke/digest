@@ -32,7 +32,7 @@ const proxyImageUrl = computed(() => {
 <template>
   <NuxtLink :to="url" external target="_blank">
     <figure v-if="proxyImageUrl">
-      <NuxtImg :src="proxyImageUrl" :alt="title" loading="lazy" />
+      <NuxtImg :src="proxyImageUrl" :alt="title" loading="lazy" densities="1x" />
     </figure>
     <div>
       <h2>{{ title }}</h2>
