@@ -1,0 +1,33 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - '@vizejs/native-darwin-arm64@0.627.0'
+  - '@vizejs/native-darwin-x64@0.627.0'
+  - '@vizejs/native-linux-arm64-gnu@0.627.0'
+  - '@vizejs/native-linux-arm64-musl@0.627.0'
+  - '@vizejs/native-linux-x64-gnu@0.627.0'
+  - '@vizejs/native-linux-x64-musl@0.627.0'
+  - '@vizejs/native-win32-arm64-msvc@0.627.0'
+  - '@vizejs/native-win32-x64-msvc@0.627.0'
+  - '@vizejs/native@0.627.0'
+  - '@vizejs/nuxt-lint-config@0.627.0'
+  - '@vizejs/nuxt@0.627.0'
+  - '@vizejs/unplugin@0.627.0'
+  - '@vizejs/vite-plugin-musea@0.627.0'
+  - '@vizejs/vite-plugin@0.627.0'
+  - oxlint-plugin-vize@0.627.0
+  - vize@0.627.0
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
+  vite-plus: 1.4.0
+overrides:
+  vite@*: 'catalog:'
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: '*'

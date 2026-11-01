@@ -30,7 +30,7 @@ function parseRssXml(xml: string, source: Source): FeedItem[] {
   let match
 
   while ((match = itemRegex.exec(xml)) !== null) {
-    const itemXml = match[1]
+    const itemXml = match[1] ?? ''
 
     items.push({
       title: getTagContent(itemXml, 'title'),
@@ -57,7 +57,5 @@ export async function fetchRssFeed(source: Source): Promise<FeedItem[]> {
 export async function fetchAllFeeds(sources: Source[]): Promise<FeedItem[]> {
   const results = await Promise.all(sources.map(fetchRssFeed))
 
-  return results
-    .flat()
-    .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+  return results.flat().sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
 }

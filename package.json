@@ -1,7 +1,7 @@
 {
   "name": "digest",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -11,18 +11,22 @@
   },
   "dependencies": {
     "@nuxt/a11y": "1.0.0-alpha.1",
-    "@nuxt/eslint": "1.12.1",
-    "@nuxt/fonts": "0.12.1",
-    "@nuxt/hints": "1.0.0-alpha.5",
-    "@nuxt/icon": "2.2.0",
-    "@nuxt/image": "2.0.0",
-    "eslint": "^9.39.2",
-    "nuxt": "^4.2.2",
-    "vue": "^3.5.26",
-    "vue-router": "^4.6.4"
+    "@nuxt/fonts": "1.2.0",
+    "@nuxt/hints": "1.1.5",
+    "@nuxt/icon": "2.6.2",
+    "@nuxt/image": "2.2.1",
+    "nuxt": "^4.6.3",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "typescript": "^5.9.3"
-  }
+    "@vizejs/nuxt": "0.627.0",
+    "@vizejs/vite-plugin": "0.627.0",
+    "typescript": "^7.0.2",
+    "vite-plus": "catalog:",
+    "vize": "0.627.0",
+    "wrangler": "^4.156.0"
+  },
+  "packageManager": "pnpm@12.9.0"
 }

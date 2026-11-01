@@ -19,8 +19,8 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@vizejs/nuxt',
     '@nuxt/a11y',
-    '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/hints',
     '@nuxt/icon',
@@ -31,11 +31,26 @@ export default defineNuxtConfig({
     provider: 'none'
   },
 
+  // Fetch and render feeds at build time so the Worker serves static assets
+  // and never parses feeds per request (Workers free plan: 10ms CPU per request).
+  // Lint / fmt / check run through Vite+ (vite.config.ts); the module only wires .vue
+  // files into the generated tsconfig for `vize check`. Its SFC compiler is off: with
+  // it on, prerendering `/` fails because <NuxtImg> resolves to Nuxt's stub instead of
+  // the @nuxt/image component (@vizejs/nuxt 0.627.0).
+  vize: { compiler: false, lint: false },
+
+  routeRules: {
+    '/': { prerender: true },
+    '/api/feeds': { prerender: true }
+  },
+
   nitro: {
     preset: 'cloudflare_module',
     cloudflare: {
       deployConfig: true,
-      nodeCompat: true
+      nodeCompat: true,
+      // Must match the existing Worker (Cloudflare Git integration deploys it as `digest`)
+      wrangler: { name: 'digest' }
     }
   }
 })

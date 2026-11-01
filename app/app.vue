@@ -27,6 +27,7 @@ const { data: feeds, status } = await useFetch('/api/feeds')
   </div>
 </template>
 
+<!-- eslint-disable-next-line vue/require-scoped-style -->
 <style>
 * {
   margin: 0;
@@ -35,7 +36,10 @@ const { data: feeds, status } = await useFetch('/api/feeds')
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: #f5f5f5;
   color: #333;
   line-height: 1.6;
