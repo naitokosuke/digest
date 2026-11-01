@@ -48,7 +48,9 @@ export default defineNuxtConfig({
     preset: 'cloudflare_module',
     cloudflare: {
       deployConfig: true,
-      nodeCompat: true
+      nodeCompat: true,
+      // Must match the existing Worker (Cloudflare Git integration deploys it as `digest`)
+      wrangler: { name: 'digest' }
     }
   }
 })

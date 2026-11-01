@@ -1,19 +1,22 @@
-name: Deploy
+name: CI / Deploy
 
 on:
   push:
     branches: [main]
+  pull_request:
   schedule:
-    # Rebuild every 6 hours so the prerendered feeds stay fresh (UTC)
+    # Rebuild every 6 hours so the prerendered feeds stay fresh (UTC).
+    # Pushes to main are deployed by the Cloudflare Git integration (Workers Builds);
+    # this workflow only deploys on the schedule and on manual runs.
     - cron: '0 */6 * * *'
   workflow_dispatch:
 
 concurrency:
-  group: deploy
+  group: deploy-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -23,6 +26,19 @@ jobs:
           cache: true
           run-install: true
       - run: vp run check
+      - run: vp run build
+
+  deploy:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: voidzero-dev/setup-vp@v1.22.0
+        with:
+          node-version: '24'
+          cache: true
+          run-install: true
       - run: vp run build
       - run: vp exec wrangler deploy --config .output/server/wrangler.json
         env:

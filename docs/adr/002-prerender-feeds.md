@@ -28,6 +28,7 @@ KV ネームスペースの作成も必要になる。
 `/` と `/api/feeds` を `routeRules` でプリレンダし、静的アセットとして配信する。
 Worker はこれらのパスでは起動せず、CPU 時間を消費しない。
 鮮度は GitHub Actions の定期実行でビルドとデプロイをやり直すことで保つ。
+main への push は従来どおり Cloudflare の Git 連携 (Workers Builds) がデプロイする。
 
 ## 決定
 
@@ -42,7 +43,8 @@ Worker はこれらのパスでは起動せず、CPU 時間を消費しない。
 ## 影響
 
 * `nuxt.config.ts` の `routeRules` で `/` と `/api/feeds` をプリレンダする
-* `.github/workflows/deploy.yml` が main への push と 6 時間おきの cron でビルドとデプロイを行う
-* GitHub リポジトリの secrets に `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要
+* main への push は Cloudflare の Git 連携が Worker `digest` にデプロイする。`nuxt.config.ts` の `cloudflare.wrangler.name` を `digest` に固定し、wrangler から手でデプロイしても同じ Worker に届くようにした
+* `.github/workflows/deploy.yml` は push と PR で `vp run check` と `vp run build` を走らせ、6 時間おきの cron と手動実行のときだけデプロイする
+* GitHub リポジトリの secrets に `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要 (定期デプロイ用)
 * 新しい記事がサイトに反映されるまで最大 6 時間かかる
 * `/api/image` は引き続きランタイムで動く

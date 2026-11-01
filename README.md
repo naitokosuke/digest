@@ -26,8 +26,9 @@ vp run check
 
 ## デプロイ
 
-`.github/workflows/deploy.yml` が main への push と 6 時間おきの cron でビルドとデプロイを行う。
-GitHub リポジトリの secrets に `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要。
+main への push は Cloudflare の Git 連携 (Workers Builds) が Worker `digest` にデプロイする。
+`.github/workflows/deploy.yml` は push と PR でチェックとビルドを走らせ、6 時間おきの cron と手動実行のときだけデプロイする (プリレンダしたフィードの更新用)。
+定期デプロイには GitHub リポジトリの secrets に `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要。
 
 手元からデプロイする場合:
 
