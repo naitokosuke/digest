@@ -19,8 +19,8 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@vizejs/nuxt',
     '@nuxt/a11y',
-    '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/hints',
     '@nuxt/icon',
@@ -30,6 +30,12 @@ export default defineNuxtConfig({
   image: {
     provider: 'none'
   },
+
+  // Lint / fmt / check run through Vite+ (vite.config.ts); the module only wires .vue
+  // files into the generated tsconfig for `vize check`. Its SFC compiler is off: with
+  // it on, prerendering `/` fails because <NuxtImg> resolves to Nuxt's stub instead of
+  // the @nuxt/image component (@vizejs/nuxt 0.627.0).
+  vize: { compiler: false, lint: false },
 
   nitro: {
     preset: 'cloudflare_module',
