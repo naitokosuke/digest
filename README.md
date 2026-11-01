@@ -1,75 +1,37 @@
-# Nuxt Minimal Starter
+# Digest
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+naitokosuke のフィード (Zenn、しずかなインターネット、Slides、Blog) をまとめて表示するサイト。
+https://digest.naito.dev/
 
-## Setup
+Nuxt 4 で作り、Cloudflare Workers で配信している。
+フィードはビルド時に取得してプリレンダし、Worker は静的アセットを返すだけにしている (docs/adr を参照)。
 
-Make sure to install dependencies:
+パッケージ管理とタスク実行は Vite+ (`vp`) で行う。lint と型検査は Vize、整形は Oxfmt で行う。
 
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## 開発
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+vp install
+vp run dev
 ```
 
-## Production
-
-Build the application for production:
+## 検証
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+vp run check
 ```
 
-Locally preview production build:
+`vize check`、`vize lint`、`vp fmt --check` を順に実行する。個別には `vp run typecheck`、`vp run lint`、`vp run fmt:check` がある。
+`vp run fmt` で整形を、`vp run lint:fix` で lint の自動修正を適用する。
+
+## デプロイ
+
+`.github/workflows/deploy.yml` が main への push と 6 時間おきの cron でビルドとデプロイを行う。
+GitHub リポジトリの secrets に `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要。
+
+手元からデプロイする場合:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+vp run build
+vp exec wrangler deploy --config .output/server/wrangler.json
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
